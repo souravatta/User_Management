@@ -1,0 +1,10 @@
+---
+# tasks file for users
+
+- include_tasks: display_uname_pwd.yml
+
+- include_tasks: adding_user.yml
+
+- include_tasks: adding_using_template.yml
+
+- include_tasks: force_change_password.yml

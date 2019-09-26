@@ -1,0 +1,10 @@
+---
+
+- name: Adding user using Template
+  become: yes
+  template:
+    src: ./templates/grant_sudo_access.j2
+    dest: "/etc/sudoers.d/{{ username }}"
+    owner: root
+    group: root
+    mode: 0600

@@ -1,0 +1,13 @@
+---
+
+- name: ADD User
+  user:
+       name: "{{ username }}"
+       comment: "Sudo User"
+       shell: "{{ user_shell }}"
+       group: "{{ username }}"
+       groups: "{{ user_group }}"
+       createhome: True
+       home: "{{ user_home }}"
+       password: "{{ setting_password | string | password_hash('sha512', 'salty') }}"
+       state: present

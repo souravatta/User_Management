@@ -1,0 +1,12 @@
+---
+
+- name: "----: ADDING USER :-----"
+  hosts: all
+  become: yes
+  connection: local
+  vars_prompt:
+   - name: username
+     prompt: "Enter Username"
+     private: no
+  roles:
+    - { role: users }

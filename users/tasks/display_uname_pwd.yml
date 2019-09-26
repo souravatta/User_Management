@@ -1,0 +1,12 @@
+---
+
+- name: Display Username Entered
+  debug:
+    msg: "The username is: {{ username }}"
+
+- name: Display default Password
+  debug:
+    msg: "Password: {{ default_password }}"
+
+- set_fact:
+    setting_password: "{{ default_password }}"

@@ -6,7 +6,7 @@
        comment: "Sudo User"
        shell: "{{ user_shell }}"
        group: "{{ username }}"
-       groups: "{{ user_group }}"
+       groups: "{{ user_groups }}"
        createhome: True
        home: "{{ user_home }}"
        password: "{{ setting_password | string | password_hash('sha512', 'salty') }}"

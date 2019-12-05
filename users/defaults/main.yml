@@ -5,6 +5,4 @@ default_password: "{{ username }}123"
 
 user_home: "/opt/app/home/{{ username }}"
 
-user_group: "sudo"
-
 user_shell: "/bin/bash"

@@ -24,9 +24,9 @@ Role Variables
 | Name               | Default Value                      | Description                                                       |
 | ------------------ | ---------------------------------- | ----------------------------------------------------------------- |
 | default_password   | `{{ username }}`123                | The default password assigned to user                             |
-| user_home          | `/opt/app/home/{{ username }}`     | The home directory for the user                                   |
-| user_group         | `sudo, docker`                     | The groups where the user should be assigned                      |
-| user_shell        | `"/bin/bash"`                       | The default shell for the user                                    |
+| user_home          | `/home/{{ username }}`             | The home directory for the user                                   |
+| user_group         | `docker`                           | The groups where the user should be assigned                      |
+| user_shell         | `"/bin/bash"`                      | The default shell for the user                                    |
 
 **Other_Variables**
 

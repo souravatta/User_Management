@@ -1,2 +1,5 @@
 [local]
 localhost
+
+[cluster]
+server01 hostname=xx.xxx.xxx.xx ansible_ssh_user=xxxxx

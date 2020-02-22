@@ -1,9 +1,15 @@
 ---
 
+- name: Create group first
+  group:
+    name: "{{ username }}"
+    state: present
+  become: yes
+  become_method: sudo
+
 - name: ADD User
   user:
        name: "{{ username }}"
-       comment: "Sudo User"
        shell: "{{ user_shell }}"
        group: "{{ username }}"
        groups: "{{ user_groups }}"
@@ -11,3 +17,14 @@
        home: "{{ user_home }}"
        password: "{{ setting_password | string | password_hash('sha512', 'salty') }}"
        state: present
+  become: yes
+  become_method: sudo
+
+- name: Change ownership of home directory
+  file:
+    path: "{{ user_home }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+  become: yes
+  become_method: sudo

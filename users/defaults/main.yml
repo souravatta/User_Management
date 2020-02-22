@@ -3,6 +3,6 @@
 
 default_password: "{{ username }}123"
 
-user_home: "/opt/app/home/{{ username }}"
+user_home: "/home/{{ username }}"
 
 user_shell: "/bin/bash"

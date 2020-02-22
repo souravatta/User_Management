@@ -7,7 +7,7 @@ The playbook aims to create sudo users in linux. The playbook will prompt to ent
 
 Requirements
 ------------
-1) The user used to run anisble playbook should be ssh user and have sudo access on the client server.
+1) There should be ssh connection between the master node and all other host nodes.
 2) ***Template file*** should be available for configuring sudo command for user.
 
   ```yaml
@@ -42,8 +42,6 @@ Example 1 Playbook
 ------------------
 
 ```yaml
----
-
 - name: "----: ADDING USER :-----"
   hosts: all
   vars_prompt:
@@ -62,23 +60,44 @@ Example 2 Playbook
 ------------------
 
 ```yaml
+- name: Create group first
+  group:
+    name: "{{ username }}"
+    state: present
+  become: yes
+  become_method: sudo
+
 - name: ADD User
   user:
        name: "{{ username }}"
-       comment: "Sudo User"
        shell: "{{ user_shell }}"
        group: "{{ username }}"
-       groups: "{{ user_group }}"
+       groups: "{{ user_groups }}"
        createhome: True
        home: "{{ user_home }}"
        password: "{{ setting_password | string | password_hash('sha512', 'salty') }}"
        state: present
+  become: yes
+  become_method: sudo
+
+- name: Change ownership of home directory
+  file:
+    path: "{{ user_home }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+  become: yes
+  become_method: sudo
 ```
 ---
 
 Usage
 -----
-After you clone this repo to your desktop, go to its root directory and run the playbook using `ansible-playbook deploy.yml -k` to run the playbook on hosts defined in `ansiserver file`. It will prompt for ssh password for the ssh user mentioned in `ansiserver file`.
+1) After you clone this repo to your desktop, go to its root directory and change the files **ansible.cfg** and **ansiserver**.
+2) In file **ansiserver**, add the hosts you want to run the playbook. 
+3) In file **ansible.cfg** change the path of inventory file.
+4) If the ssh user used to login hosts doesn't have ssh password, then run the playbook using `ansible-playbook deploy.yml`.
+5) If the ssh user used to login hosts have ssh password, then run the playbook using `ansible-playbook deploy.yml -k`. It will prompt for `ssh password`.
 
 If you want to check what are the changes playbook will make rather than making them, use `--check` with ansible-playbook to be execute.
 

@@ -1,14 +1,13 @@
 ---
 
 - name: "----: ADDING USER :-----"
-  hosts: cluster
-  become: yes
+  hosts: all
   vars_prompt:
    - name: username
      prompt: "Enter Username"
      private: no
    - name: user_groups
-     prompt: "Enter teh groups name (separated by comma)"
+     prompt: "Enter the groups name (separated by comma)"
      private: no
   roles:
     - { role: users }

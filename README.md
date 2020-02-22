@@ -42,17 +42,17 @@ Example 1 Playbook
 ------------------
 
 ```yaml
-- name: "-----: ADDING USER :------"
+---
+
+- name: "----: ADDING USER :-----"
   hosts: all
-  become: yes
-  connection: local
   vars_prompt:
    - name: username
      prompt: "Enter Username"
      private: no
    - name: user_groups
-     prompt: "Enter teh groups name (separated by comma)"
-     private: no 
+     prompt: "Enter the groups name (separated by comma)"
+     private: no
   roles:
     - { role: users }
 ```
